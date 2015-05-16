@@ -50,7 +50,7 @@ class InvoiceManager(models.Manager):
                            draft=False)
 
 
-class Invoice(TimeStampedModel):
+class Invoice(TimeStampedModel, settings.INV_INV_MODULE):
     EXPORTED_CHOICES = (
         ('no', _(u'no')),
         ('invoice_only', _(u'Invoice only')),
@@ -265,7 +265,7 @@ class Invoice(TimeStampedModel):
             return False
 
 
-class InvoiceItem(models.Model):
+class InvoiceItem(settings.INV_ITEM_MODULE):
     invoice = models.ForeignKey(Invoice, related_name='items', unique=False,
                                 verbose_name=_(u'invoice'))
     description = models.CharField(_(u"description"), max_length=100)
@@ -317,7 +317,7 @@ class InvoicePayment(models.Model):
                                              auto_now=True)
 
     def __unicode__(self):
-        return self.amount
+        return unicode(self.amount)
 
     class Meta:
         verbose_name = _(u"invoice payment")

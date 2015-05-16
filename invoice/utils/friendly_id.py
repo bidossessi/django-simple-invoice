@@ -105,7 +105,7 @@ def friendly_number(num):
     return string
 
 
-def encode(num):
+def encode(pk, num):
     """ Encode a simple number, using a perfect hash and converting to a
         more user friendly string of characters.
     """
