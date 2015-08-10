@@ -23,3 +23,4 @@ INV_EXPORT_MODULE = getattr(settings, 'INV_EXPORT_MODULE',
                             'invoice.export_example')
 INV_INV_MODULE = getattr(settings, 'INV_INV_MODULE', models.Model)
 INV_ITEM_MODULE = getattr(settings, 'INV_ITEM_MODULE', models.Model)
+INV_PAYMENT_MODULE = getattr(settings, 'INV_PAYMENT_MODULE', models.Model)

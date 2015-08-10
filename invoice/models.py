@@ -290,7 +290,7 @@ class InvoiceItem(settings.INV_ITEM_MODULE):
         verbose_name_plural = _(u"invoice items")
 
 
-class InvoicePayment(models.Model):
+class InvoicePayment(settings.INV_PAYMENT_MODULE):
 
     METHOD_CHOICES = (
         ('cheque', _(u'cheque')),
