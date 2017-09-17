@@ -3,10 +3,7 @@ from django.conf import settings
 from django.utils.text import get_valid_filename
 from django.core.files.storage import FileSystemStorage
 from django.utils.translation import ugettext_lazy as _
-try:
-    from django.utils import importlib
-except ImportError:
-    import importlib
+import importlib
 
 import csv
 from datetime import datetime, date

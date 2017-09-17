@@ -17,10 +17,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.core import urlresolvers
 from django.db.models.signals import post_delete, post_save
 from django.dispatch import receiver
-try:
-    from django.utils import importlib
-except ImportError:
-    import importlib
+import importlib
 
 from .utils import format_currency
 from .conf import settings as app_settings

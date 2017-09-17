@@ -1,7 +1,4 @@
-try:
-    from django.utils import importlib
-except ImportError:
-    import importlib
+import importlib
 
 from invoice.conf import settings
 
