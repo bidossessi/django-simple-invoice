@@ -13,6 +13,7 @@ from django_extensions.db.models import TimeStampedModel
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.core import urlresolvers
 from django.db.models.signals import post_delete, post_save
@@ -298,7 +299,7 @@ class InvoicePayment(settings.INV_PAYMENT_MODULE):
                                 verbose_name=_(u'invoice'))
     amount = models.DecimalField(_(u"amount"), max_digits=8,
                                  decimal_places=2)
-    paid_date = models.DateField(_(u"paid date"), default=date.today())
+    paid_date = models.DateField(_(u"paid date"), default=timezone.now)
     method = models.CharField(_(u"payment method"), max_length=20,
                               choices=METHOD_CHOICES,
                               blank=True, null=True)
