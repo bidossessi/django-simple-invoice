@@ -20,9 +20,13 @@ from django.db.models.signals import post_delete, post_save
 from django.dispatch import receiver
 import importlib
 
-from .utils import format_currency
+from .utils import format_currency, import_from
 from .conf import settings as app_settings
 from .pdf import draw_pdf
+
+INV_MODULE_CLASS = import_from(settings.INV_INV_MODULE)
+INV_ITEM_CLASS = import_from(settings.INV_ITEM_MODULE)
+INV_PAYMENT_CLASS = import_from(settings.INV_PAYMENT_MODULE)
 
 
 class Currency(models.Model):
@@ -48,7 +52,7 @@ class InvoiceManager(models.Manager):
                            draft=False)
 
 
-class Invoice(TimeStampedModel, settings.INV_INV_MODULE):
+class Invoice(TimeStampedModel, INV_MODULE_CLASS):
     EXPORTED_CHOICES = (
         ('no', _(u'no')),
         ('invoice_only', _(u'Invoice only')),
@@ -263,7 +267,7 @@ class Invoice(TimeStampedModel, settings.INV_INV_MODULE):
             return False
 
 
-class InvoiceItem(settings.INV_ITEM_MODULE):
+class InvoiceItem(INV_ITEM_CLASS):
     invoice = models.ForeignKey(Invoice, related_name='items', unique=False,
                                 verbose_name=_(u'invoice'))
     description = models.CharField(_(u"description"), max_length=100)
@@ -288,7 +292,7 @@ class InvoiceItem(settings.INV_ITEM_MODULE):
         verbose_name_plural = _(u"invoice items")
 
 
-class InvoicePayment(settings.INV_PAYMENT_MODULE):
+class InvoicePayment(INV_PAYMENT_CLASS):
 
     METHOD_CHOICES = (
         ('cheque', _(u'cheque')),

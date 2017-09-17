@@ -1,5 +1,13 @@
+# -*- coding: utf-8 -*-
+from importlib import import_module
 from django.http import HttpResponse
 from ..conf import settings
+
+
+def import_from(fullpath):
+    p, m = fullpath.rsplit('.', 1)
+    mod = import_module(p)
+    return getattr(mod, m)
 
 
 def format_currency(amount, currency=None):
