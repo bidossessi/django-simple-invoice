@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
 from invoice.models import Invoice, InvoiceItem, Currency, InvoicePayment,\
     Export
@@ -70,11 +70,10 @@ class InvoiceAdmin(admin.ModelAdmin):
         urls = super(InvoiceAdmin, self).get_urls()
         wrapped_pdf_dl_view = self.admin_site.admin_view(pdf_dl_view)
         wrapped_pdf_gen_view = self.admin_site.admin_view(pdf_gen_view)
-        urls = patterns(
-            '',
-            (r'^(.+)/pdf/download/$', wrapped_pdf_dl_view),
-            (r'^(.+)/pdf/generate/$', wrapped_pdf_gen_view),
-        ) + urls
+        urls = [
+            url(r'^(.+)/pdf/download/$', wrapped_pdf_dl_view),
+            url(r'^(.+)/pdf/generate/$', wrapped_pdf_gen_view),
+        ] + urls
         return urls
 
 
@@ -89,12 +88,11 @@ class ExportAdmin(admin.ModelAdmin):
         urls = super(ExportAdmin, self).get_urls()
         wrapped_export_view = self.admin_site.admin_view(export_view)
         wrapped_export_test_view = self.admin_site.admin_view(export_test_view)
-        urls = patterns(
-            '',
+        urls = [
             url(r'^do_it/$', wrapped_export_view, name='export_accounts'),
             url(r'^do_it/test$', wrapped_export_test_view,
                 name='export_accounts_test'),
-        ) + urls
+        ] + urls
         return urls
 
 
