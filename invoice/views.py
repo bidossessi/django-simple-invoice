@@ -11,7 +11,7 @@ from invoice.utils import pdf_response
 from invoice.export import export
 
 from os.path import getsize
-from django.core.servers.basehttp import FileWrapper
+from wsgiref.util import FileWrapper
 
 
 def pdf_dl_view(request, pk):
