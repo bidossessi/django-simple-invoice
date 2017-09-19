@@ -48,5 +48,6 @@ setup(
         'reportlab>=2.7',
         'PyPDF2>=1.20',
         'django-extensions>=1.3.3',
+        'django-addresses>=0.1',
     ]
 )
